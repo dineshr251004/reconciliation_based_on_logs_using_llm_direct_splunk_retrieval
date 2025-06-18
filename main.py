@@ -466,9 +466,9 @@ class SplunkLogAnalysis:
         print("Testing Splunk connection...")
         connection_result = self.splunk.test_connection()
         if connection_result:
-            print("✓ Splunk connection successful")
+            print("Splunk connection successful")
         else:
-            print("⚠ Warning: Could not establish reliable connection to Splunk")
+            print("Warning: Could not establish reliable connection to Splunk")
     
     def run_custom_query(self, spl_query: str, max_results: int = 1000) -> List[Dict]:
         """Run a custom SPL query and return raw results"""
