@@ -57,20 +57,20 @@ class ProcessMatcher:
         text1_clean = self.preprocess_text(text1)
         text2_clean = self.preprocess_text(text2)
         
-        # 1. Sequence Matcher (overall similarity)
+        # Sequence Matcher
         seq_sim = SequenceMatcher(None, text1_clean, text2_clean).ratio()
         
-        # 2. Jaro-Winkler similarity (good for typos and variations)
+        # Jaro-Winkler similarity
         jaro_sim = jellyfish.jaro_winkler_similarity(text1_clean, text2_clean)
         
-        # 3. Levenshtein distance normalized
+        # Levenshtein distance
         max_len = max(len(text1_clean), len(text2_clean))
         if max_len == 0:
             leven_sim = 1.0
         else:
             leven_sim = 1 - (jellyfish.levenshtein_distance(text1_clean, text2_clean) / max_len)
         
-        # 4. Keyword overlap
+        # Keyword overlap
         keywords1 = set(self.extract_keywords(text1))
         keywords2 = set(self.extract_keywords(text2))
         
